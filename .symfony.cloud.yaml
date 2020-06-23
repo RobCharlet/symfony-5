@@ -4,6 +4,7 @@ type: php:7.3
 
 runtime:
     extensions:
+        - redis
         - pdo_pgsql
         - apcu
         - mbstring
@@ -31,7 +32,7 @@ hooks:
         set -x -e
 
         curl -s https://get.symfony.com/cloud/configurator | (>&2 bash)
-        
+
         (>&2 symfony-build)
 
     deploy: |
@@ -41,3 +42,4 @@ hooks:
 
 relationships:
     database: "db:postgresql"
+    redis: "rediscache:redis"
