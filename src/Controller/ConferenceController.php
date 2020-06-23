@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ConferenceController extends AbstractController
 {
     /**
-     * @Route("/{name}", name="homepage")
+     * @Route("/hello/{name}", name="homepage")
      * @param Request     $request
      * @param null|string $name
      *
