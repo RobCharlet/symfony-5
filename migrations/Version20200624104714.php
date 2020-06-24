@@ -10,25 +10,23 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200624102549 extends AbstractMigration
+final class Version20200624104714 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return 'Create Conference slug column';
+        return 'Set conference slug unique';
     }
 
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE conference ADD slug VARCHAR(255)');
-        $this->addSql("UPDATE conference SET slug=CONCAT(LOWER(city), '-', year)");
-        $this->addSql('ALTER TABLE conference ALTER COLUMN slug SET NOT NULL');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_911533C8989D9B62 ON conference (slug)');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE conference DROP slug');
+        $this->addSql('DROP INDEX UNIQ_911533C8989D9B62');
     }
 }
