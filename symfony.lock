@@ -164,13 +164,13 @@
         "version": "v5.1.2"
     },
     "symfony/cache": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/cache-contracts": {
         "version": "v2.1.2"
     },
     "symfony/config": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/console": {
         "version": "4.4",
@@ -204,13 +204,13 @@
         "version": "v1.0.8"
     },
     "symfony/dependency-injection": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/deprecation-contracts": {
         "version": "v2.1.2"
     },
     "symfony/doctrine-bridge": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/dom-crawler": {
         "version": "v5.1.2"
@@ -219,10 +219,10 @@
         "version": "v5.0.10"
     },
     "symfony/error-handler": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/event-dispatcher": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v2.1.2"
@@ -231,10 +231,10 @@
         "version": "v5.1.2"
     },
     "symfony/filesystem": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/finder": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/flex": {
         "version": "1.0",
@@ -278,10 +278,10 @@
         "version": "v2.1.2"
     },
     "symfony/http-foundation": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/http-kernel": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/inflector": {
         "version": "v5.1.2"
@@ -302,7 +302,7 @@
         "version": "v5.1.2"
     },
     "symfony/monolog-bridge": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/monolog-bundle": {
         "version": "3.3",
@@ -371,12 +371,12 @@
         "version": "v5.1.2"
     },
     "symfony/routing": {
-        "version": "4.2",
+        "version": "5.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "4.2",
-            "ref": "683dcb08707ba8d41b7e34adb0344bfd68d248a7"
+            "version": "5.1",
+            "ref": "b4f3e7c95e38b606eef467e8a42a8408fc460c43"
         },
         "files": [
             "config/packages/prod/routing.yaml",
@@ -412,7 +412,7 @@
         "version": "v2.1.2"
     },
     "symfony/stopwatch": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/string": {
         "version": "v5.1.2"
@@ -437,7 +437,7 @@
         "version": "v2.1.2"
     },
     "symfony/twig-bridge": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/twig-bundle": {
         "version": "5.0",
@@ -470,10 +470,10 @@
         ]
     },
     "symfony/var-dumper": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/var-exporter": {
-        "version": "v5.0.10"
+        "version": "v5.1.2"
     },
     "symfony/web-profiler-bundle": {
         "version": "3.3",
