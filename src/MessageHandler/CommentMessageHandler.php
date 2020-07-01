@@ -9,6 +9,8 @@ use App\Repository\CommentRepository;
 use App\SpamChecker;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Twig\Mime\NotificationEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Workflow\WorkflowInterface;
@@ -39,6 +41,14 @@ class CommentMessageHandler implements MessageHandlerInterface
      * @var null|LoggerInterface
      */
     private $logger;
+    /**
+     * @var MailerInterface
+     */
+    private $mailer;
+    /**
+     * @var string
+     */
+    private $adminEmail;
 
     /**
      * CommentMessageHandler constructor.
@@ -48,6 +58,8 @@ class CommentMessageHandler implements MessageHandlerInterface
      * @param CommentRepository      $commentRepository
      * @param MessageBusInterface    $bus
      * @param WorkflowInterface      $commentStateMachine
+     * @param MailerInterface        $mailer
+     * @param string                 $adminEmail
      * @param LoggerInterface|null   $logger
      */
     public function __construct(
@@ -56,15 +68,19 @@ class CommentMessageHandler implements MessageHandlerInterface
         CommentRepository $commentRepository,
         MessageBusInterface $bus,
         WorkflowInterface $commentStateMachine,
+        MailerInterface $mailer,
+        // Bind by services.yaml
+        string $adminEmail,
         LoggerInterface $logger = null
-    )
-    {
-        $this->entityManager = $entityManager;
-        $this->spamChecker = $spamChecker;
+    ) {
+        $this->entityManager     = $entityManager;
+        $this->spamChecker       = $spamChecker;
         $this->commentRepository = $commentRepository;
-        $this->bus = $bus;
-        $this->workflow = $commentStateMachine;
-        $this->logger = $logger;
+        $this->bus               = $bus;
+        $this->workflow          = $commentStateMachine;
+        $this->logger            = $logger;
+        $this->mailer            = $mailer;
+        $this->adminEmail        = $adminEmail;
     }
 
     public function __invoke(CommentMessage $message)
@@ -77,7 +93,7 @@ class CommentMessageHandler implements MessageHandlerInterface
 
         // If the accept transition is available for the comment in the message, check for spam
         if ($this->workflow->can($comment, 'accept')) {
-            $score = $this->spamChecker->getSpamScore($comment, $message->getContext());
+            $score      = $this->spamChecker->getSpamScore($comment, $message->getContext());
             $transition = 'accept';
 
             // Depending on the outcome, choose the right transition to apply
@@ -95,21 +111,29 @@ class CommentMessageHandler implements MessageHandlerInterface
 
             // Re-dispatch the message to allow the workflow to transition again
             $this->bus->dispatch($message);
-        }
-        //Will be handled by admin later
-        else if (
-            $this->workflow->can($comment, 'publish') || $this->workflow->can($comment, 'publish_ham')
-        ) {
-            $this->workflow->apply(
-                $comment,
-                $this->workflow->can($comment, 'publish') ? 'publish' : 'publish_ham'
-            );
-            $this->entityManager->flush();
-        }
+        } //Will be handled by admin later
+        else {
+            if (
+                $this->workflow->can($comment, 'publish') || $this->workflow->can($comment, 'publish_ham')
+            ) {
+                $this->mailer->send(
+                    (new NotificationEmail())
+                        ->subject('New comment posted')
+                        ->htmlTemplate('emails/comment_notification.html.twig')
+                        ->from($this->adminEmail)
+                        ->to($this->adminEmail)
+                        ->context(['comment' => $comment])
+                );
 
-
-        else if ($this->logger) {
-            $this->logger->debug('Dropping comment message', ['comment' => $comment->getId(), 'state' => $comment->getState()]);
+                $this->entityManager->flush();
+            } else {
+                if ($this->logger) {
+                    $this->logger->debug(
+                        'Dropping comment message',
+                        ['comment' => $comment->getId(), 'state' => $comment->getState()]
+                    );
+                }
+            }
         }
 
         $this->entityManager->flush();
