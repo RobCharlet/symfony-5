@@ -18,3 +18,9 @@ symfony run -d yarn encore dev --watch
 `curl -I -X PURGE -u admin:admin `symfony var:export SYMFONY_DEFAULT_ROUTE_URL`/admin/http-cache/`
 `curl -I -X PURGE -u admin:admin `symfony var:export SYMFONY_DEFAULT_ROUTE_URL`/admin/http-cache/conference_header
 
+## Ouvrir mailcatcher
+symfony open:local:webmail
+
+## Ouvrir RabbitMQ (guest/guest)
+symfony open:local:rabbitmq
+symfony open:local:rabbitmq
