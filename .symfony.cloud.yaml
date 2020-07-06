@@ -1,8 +1,8 @@
-name: app
+name         : app
 
-type: php:7.3
+type         : php:7.3
 
-runtime:
+runtime      :
     extensions:
         - amqp
         - redis
@@ -13,24 +13,24 @@ runtime:
         - iconv
         - ctype
 
-build:
+build        :
     flavor: none
 
-web:
+web          :
     locations:
         "/":
-            root: "public"
-            expires: 1h
+            root    : "public"
+            expires : 1h
             passthru: "/index.php"
 
-disk: 512
+disk         : 512
 
-mounts:
-    "/var": { source: local, source_path: var }
+mounts       :
+    "/var"           : { source: local, source_path: var }
     "/public/uploads": { source: service, service: files, source_path: uploads }
 
-hooks:
-    build: |
+hooks        :
+    build : |
         set -x -e
 
         curl -s https://get.symfony.com/cloud/configurator | (>&2 bash)
@@ -42,7 +42,16 @@ hooks:
 
         (>&2 symfony-deploy)
 
-workers:
+crons:
+    comment_cleanup:
+        # Cleanup every night at 11.50 pm (UTC).
+        spec: '50 23 * * *'
+        cmd: |
+            if ["$SYMFONY_BRANCH" = "master"]; then
+                croncape symfony console app:comment:cleanup
+            fi
+
+workers      :
     messages:
         commands:
             start: |
@@ -54,5 +63,5 @@ workers:
 
 relationships:
     database: "db:postgresql"
-    redis: "rediscache:redis"
+    redis   : "rediscache:redis"
     rabbitmq: "queue:rabbitmq"
