@@ -10,12 +10,13 @@ use App\Repository\CommentRepository;
 use App\Repository\ConferenceRepository;
 use App\SpamChecker;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Notifier\Notification\Notification;
+use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Twig\Error\LoaderError;
@@ -100,19 +101,21 @@ class ConferenceController extends AbstractController
      * @param Request           $request
      * @param Conference        $conference
      * @param CommentRepository $commentRepository
+     * @param SpamChecker       $spamChecker
+     * @param NotifierInterface $notifier
      * @param string            $photoDir
      *
      * @return Response
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
-     * @throws Exception
      */
     public function show(
         Request $request,
         Conference $conference,
         CommentRepository $commentRepository,
         SpamChecker $spamChecker,
+        NotifierInterface $notifier,
         // Value $photoDir injected in services.yaml
         // (Symfony to inject the value whenever a service has a $photoDir argument.)
         string $photoDir
@@ -146,7 +149,16 @@ class ConferenceController extends AbstractController
             $this->bus->dispatch(new CommentMessage($comment->getId(), $context));
             // CommentMessageHandler will set Comment status asynchronously
 
+            $notifier->send(new Notification('Thank you for the feedback; your comment 
+            will be posted after moderation.', ['browser']));
+
             return $this->redirectToRoute('conference', ['slug' => $conference->getSlug()]);
+        }
+
+        // If form not valid
+        if ($form->isSubmitted()) {
+            $notifier->send(new Notification('Can you check you submission? 
+            There are some problems with it.', ['browser']));
         }
 
         $offset = max(0, $request->query->getInt('offset', 0));
