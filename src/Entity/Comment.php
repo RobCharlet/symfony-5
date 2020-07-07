@@ -83,6 +83,8 @@ class Comment
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"comment:list", "comment:item"})
      */
     private $state = "submitted";
 
