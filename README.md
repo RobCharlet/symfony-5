@@ -24,3 +24,7 @@ symfony open:local:webmail
 ## Ouvrir RabbitMQ (guest/guest)
 symfony open:local:rabbitmq
 symfony open:local:rabbitmq
+symfony open:local:rabbitmq
+
+## Et plus généralement :
+symfony open:local:nomducontainerdocker
