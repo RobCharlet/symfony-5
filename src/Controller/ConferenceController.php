@@ -12,6 +12,7 @@ use App\SpamChecker;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -57,7 +58,17 @@ class ConferenceController extends AbstractController
     }
 
     /**
-     * @Route("/", name="homepage")
+     * @Route("/")
+     *
+     * @return RedirectResponse
+     */
+    public function indexNoLocale()
+    {
+        return $this->redirectToRoute('homepage', ['_locale' => 'en']);
+    }
+
+    /**
+     * @Route("/{_locale<%app.supported_locales%>}/", name="homepage")
      * @param ConferenceRepository $conferenceRepository
      *
      * @return Response
@@ -77,7 +88,7 @@ class ConferenceController extends AbstractController
     }
 
     /**
-     * @Route("/conference_header", name="conference_header")
+     * @Route("/{_locale<%app.supported_locales%>}/conference_header", name="conference_header")
      *
      * @param ConferenceRepository $conferenceRepository
      *
@@ -97,7 +108,7 @@ class ConferenceController extends AbstractController
     }
 
     /**
-     * @Route("/conference/{slug}", name="conference")
+     * @Route("/{_locale<%app.supported_locales%>}/conference/{slug}", name="conference")
      * @param Request           $request
      * @param Conference        $conference
      * @param CommentRepository $commentRepository
