@@ -41,14 +41,16 @@ Attention il faut échapper tous les $ ex \$argon2id\$v=19\$m=65536...
 `curl -I -X PURGE -u admin:admin `symfony var:export SYMFONY_DEFAULT_ROUTE_URL`/admin/http-cache/`
 `curl -I -X PURGE -u admin:admin `symfony var:export SYMFONY_DEFAULT_ROUTE_URL`/admin/http-cache/conference_header
 
+## Conf port mailcatcher
+`symfony var:export`
+Copier dans .env le port de MAILCATCHER_URL
+
 ## Ouvrir mailcatcher
 `symfony open:local:webmail`
 
 ## Ouvrir RabbitMQ (guest/guest)
 `symfony open:local:rabbitmq`
 
-## Et plus généralement :
-`symfony open:local:nomducontainerdocker`
 
 ## Démarrer le server du SPA (A la racine du dossier de celui-ci)
 `symfony server:start -d --passthru=index.html
