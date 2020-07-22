@@ -70,3 +70,6 @@ API_ENDPOINT=`symfony var:export SYMFONY_DEFAULT_ROUTE_URL --dir=..` symfony run
 
 ## Mise à jour de la traduction (--domain=messages pour ne traduire que les messages non core type validation ou erreurs)
 `symfony console translation:update fr --force --domain=messages`
+
+## Lancer les tests
+`make tests`
