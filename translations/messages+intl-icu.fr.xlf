@@ -1,50 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
-        <header>
-            <tool tool-id="symfony" tool-name="Symfony"/>
-        </header>
-        <body>
-            <trans-unit id="eOy4.6V" resname="Conference Guestbook">
-                <source>Conference Guestbook</source>
-                <target>Livre d'Or pour les conférences</target>
-            </trans-unit>
-            <trans-unit id="LNAVleg" resname="Give your feedback!">
-                <source>Give your feedback!</source>
-                <target>Donnez votre avis !</target>
-            </trans-unit>
-            <trans-unit id="3Mg5pAF" resname="View">
-                <source>View</source>
-                <target>Sélectionner</target>
-            </trans-unit>
-            <trans-unit id="7bokozx" resname="No comments have been posted yet for this conference.">
-                <source>No comments have been posted yet for this conference.</source>
-                <target>Aucun commentaire n'a été posté sur cette conférence pour l'instant.</target>
-            </trans-unit>
-            <trans-unit id="ilFYXWP" resname="Add your own feedback">
-                <source>Add your own feedback</source>
-                <target>Ajouter votre commentaire</target>
-            </trans-unit>
-            <trans-unit id="ilFYXWD" resname="Your name">
-                <source>Your name</source>
-                <target>Votre nom</target>
-            </trans-unit>
-            <trans-unit id="ilFYXWA" resname="Text">
-                <source>Text</source>
-                <target>Texte</target>
-            </trans-unit>
-            <trans-unit id="ilFYXWB" resname="Email">
-                <source>Email</source>
-                <target>Email</target>
-            </trans-unit>
-            <trans-unit id="ilFYXWC" resname="Photo">
-                <source>Photo</source>
-                <target>Photo</target>
-            </trans-unit>
-            <trans-unit id="ilFYXWE" resname="Submit">
-                <source>Submit</source>
-                <target>Envoyer</target>
-            </trans-unit>
-        </body>
-    </file>
+  <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="eOy4.6V" resname="Conference Guestbook">
+        <source>Conference Guestbook</source>
+        <target>Livre d'Or pour les conférences</target>
+      </trans-unit>
+      <trans-unit id="LNAVleg" resname="Give your feedback!">
+        <source>Give your feedback!</source>
+        <target>Donnez votre avis !</target>
+      </trans-unit>
+      <trans-unit id="3Mg5pAF" resname="View">
+        <source>View</source>
+        <target>Sélectionner</target>
+      </trans-unit>
+      <trans-unit id="7bokozx" resname="No comments have been posted yet for this conference.">
+        <source>No comments have been posted yet for this conference.</source>
+        <target>Aucun commentaire n'a été posté sur cette conférence pour l'instant.</target>
+      </trans-unit>
+      <trans-unit id="ilFYXWP" resname="Add your own feedback">
+        <source>Add your own feedback</source>
+        <target>Ajouter votre commentaire</target>
+      </trans-unit>
+      <trans-unit id="LGsuJTw" resname="Your name">
+        <source>Your name</source>
+        <target>Votre nom</target>
+      </trans-unit>
+      <trans-unit id="cZiMTY4" resname="Text">
+        <source>Text</source>
+        <target>Texte</target>
+      </trans-unit>
+      <trans-unit id="lpzL089" resname="Email">
+        <source>Email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="2E7rrak" resname="Photo">
+        <source>Photo</source>
+        <target>Photo</target>
+      </trans-unit>
+      <trans-unit id="FV_BbAQ" resname="Submit">
+        <source>Submit</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="kdvQZ33" resname="There are %count% comments.">
+        <source>There are %count% comments.</source>
+        <target>Il y a %count% commentaires.</target>
+      </trans-unit>
+      <trans-unit id="maMQz7W" resname="nb_of_comments">
+        <source>nb_of_comments</source>
+        <target>{count, plural, =0 {Aucun Commentaire.} =1 {1 commentaire} other {# commentaires.}}</target>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
