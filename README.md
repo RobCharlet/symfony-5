@@ -67,3 +67,6 @@ API_ENDPOINT=`symfony var:export SYMFONY_DEFAULT_ROUTE_URL --dir=..` yarn encore
 
 ## Api en fond
 API_ENDPOINT=`symfony var:export SYMFONY_DEFAULT_ROUTE_URL --dir=..` symfony run -d --watch=webpack.config.js yarn encore dev --watch
+
+## Mise à jour de la traduction (--domain=messages pour ne traduire que les messages non core type validation ou erreurs)
+symfony console translation:update fr --force --domain=messages
