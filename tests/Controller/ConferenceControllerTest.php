@@ -33,6 +33,6 @@ class ConferenceControllerTest extends WebTestCase
         $comment->setState('published');
 
         $client->followRedirect();
-        $this->assertSelectorExists('div:contains("There are 2 comments")');
+        $this->assertSelectorExists('div:contains("There are one comment")');
     }
 }
